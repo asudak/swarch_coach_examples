@@ -1,0 +1,5 @@
+group 'coach.swarch.examples'
+
+allprojects {
+    version '1.0-SNAPSHOT'
+}

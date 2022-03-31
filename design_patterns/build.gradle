@@ -1,0 +1,3 @@
+allprojects {
+    group 'coach.swarch.examples.design_patterns'
+}
