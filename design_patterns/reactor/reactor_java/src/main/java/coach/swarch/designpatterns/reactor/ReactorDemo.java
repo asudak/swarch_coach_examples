@@ -162,10 +162,10 @@ class Event {
 
 abstract class EventHandler {
 
-    protected final Reactor reactor;
+    protected final Demultiplexer demultiplexer;
 
-    public EventHandler(Reactor reactor) {
-        this.reactor = reactor;
+    public EventHandler(Demultiplexer demultiplexer) {
+        this.demultiplexer = demultiplexer;
     }
 
     public abstract void handleEvent(Event event) throws IOException;
@@ -173,8 +173,8 @@ abstract class EventHandler {
 
 class AcceptEventHandler extends EventHandler {
 
-    public AcceptEventHandler(Reactor reactor) {
-        super(reactor);
+    public AcceptEventHandler(Demultiplexer demultiplexer) {
+        super(demultiplexer);
     }
 
     @Override
@@ -183,7 +183,7 @@ class AcceptEventHandler extends EventHandler {
         SocketChannel socketChannel = serverSocketChannel.accept();
         if (socketChannel != null) {
             socketChannel.configureBlocking(false);
-            reactor.registerHandle(
+            demultiplexer.registerHandle(
                 EventType.READ,
                 new Handle(socketChannel),
                 new Context()
@@ -194,8 +194,8 @@ class AcceptEventHandler extends EventHandler {
 
 class ReadEventHandler extends EventHandler {
 
-    public ReadEventHandler(Reactor reactor) {
-        super(reactor);
+    public ReadEventHandler(Demultiplexer demultiplexer) {
+        super(demultiplexer);
     }
 
     @Override
@@ -217,7 +217,7 @@ class ReadEventHandler extends EventHandler {
         String message = new String(buffer);
         if (message.endsWith("\n") && inputBuffer.limit() > 0) {
             System.out.print(message);
-            reactor.registerHandle(
+            demultiplexer.registerHandle(
                 EventType.WRITE,
                 new Handle(socketChannel),
                 context
@@ -230,8 +230,8 @@ class WriteEventHandler extends EventHandler {
 
     private static final Pattern CLIENT_ID = Pattern.compile("^.*(Client [^!]+)!$");
 
-    public WriteEventHandler(Reactor reactor) {
-        super(reactor);
+    public WriteEventHandler(Demultiplexer demultiplexer) {
+        super(demultiplexer);
     }
 
     @Override
@@ -260,10 +260,11 @@ public class ReactorDemo {
         serverChannel.configureBlocking(false);
         Selector selector = Selector.open();
 
-        Reactor reactor = new Reactor(new Demultiplexer(selector));
-        reactor.registerEventHandler(EventType.ACCEPT, new AcceptEventHandler(reactor));
-        reactor.registerEventHandler(EventType.READ, new ReadEventHandler(reactor));
-        reactor.registerEventHandler(EventType.WRITE, new WriteEventHandler(reactor));
+        Demultiplexer demultiplexer = new Demultiplexer(selector);
+        Reactor reactor = new Reactor(demultiplexer);
+        reactor.registerEventHandler(EventType.ACCEPT, new AcceptEventHandler(demultiplexer));
+        reactor.registerEventHandler(EventType.READ, new ReadEventHandler(demultiplexer));
+        reactor.registerEventHandler(EventType.WRITE, new WriteEventHandler(demultiplexer));
         reactor.registerHandle(EventType.ACCEPT, new Handle(serverChannel), null);
 
         Thread serverThread = new Thread(() -> {
