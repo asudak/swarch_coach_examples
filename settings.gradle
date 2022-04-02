@@ -1,4 +1,5 @@
 rootProject.name = 'swarch_coach_examples'
-include 'design_patterns:reactor:reactor_java'
+include 'design_patterns:join:join_java'
 include 'design_patterns:proactor:proactor_java'
+include 'design_patterns:reactor:reactor_java'
 
