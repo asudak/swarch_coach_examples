@@ -1,5 +1,6 @@
 rootProject.name = 'swarch_coach_examples'
 include 'design_patterns:half_sync_half_async:half_sync_half_async_java'
+include 'design_patterns:half_sync_half_async:half_sync_half_async_pseudo'
 include 'design_patterns:join:join_java'
 include 'design_patterns:proactor:proactor_java'
 include 'design_patterns:reactor:reactor_java'
