@@ -10,15 +10,10 @@ class Task:
         self.result = None
 
     def execute(self):
-        time.sleep(1)
-        thread = threading.current_thread()
-        self.result = "Task %s is executing in thread %s" % (self, thread.name)
-        return self
+        pass
 
     def on_complete(self):
-        print(self.result)
-        thread = threading.current_thread()
-        print("Executing completion handler in thread %s for task %s" % (thread.name, self))
+        pass
 
 
 class ThreadPool:
@@ -116,14 +111,27 @@ if __name__ == '__main__':
     synchronous_service = SynchronousService(task_queue, completed_task_queue)
     synchronous_service.run()
 
-    asynchronous_service.submit(Task())
+    class DemoTask(Task):
+
+        def execute(self):
+            time.sleep(1)
+            thread = threading.current_thread()
+            self.result = "Task %s is executing in thread %s" % (self, thread.name)
+            return self
+
+        def on_complete(self):
+            print(self.result)
+            thread = threading.current_thread()
+            print("Executing completion handler in thread %s for task %s" % (thread.name, self))
+
+    asynchronous_service.submit(DemoTask())
 
     # There should be no completed tasks at this point, since the only previously
     # submitted task sleeps for 1000ms
     completed_task = asynchronous_service.get_completed_task()
     assert completed_task is None
 
-    asynchronous_service.submit(Task())
+    asynchronous_service.submit(DemoTask())
 
     expected_tasks_to_complete = 2
     while expected_tasks_to_complete > 0:
