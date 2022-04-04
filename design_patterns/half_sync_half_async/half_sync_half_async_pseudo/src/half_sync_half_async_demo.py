@@ -17,7 +17,7 @@ class Future:
 
 class Thread:
 
-    def run(self, runnable):
+    def start(self, runnable):
         runnable()
 
 class ThreadPool:
@@ -29,7 +29,7 @@ class ThreadPool:
         def runnable():
             task.execute()
             future.complete(task)
-        thread.run(runnable)
+        thread.start(runnable)
         return future
 
 class TaskQueue:
@@ -68,7 +68,7 @@ class SynchronousService:
                 def completionHandler(task: Task):
                     self.completedTaskQueue.enqueue(task)
                 future.then(completionHandler)
-        Thread().run(runnable)
+        Thread().start(runnable)
 
 class AsynchronousService:
     taskQueue: TaskQueue
@@ -85,7 +85,8 @@ class AsynchronousService:
         return self.completedTaskQueue.dequeue()
 
 # This is a Python-based pseudocode written with the intent
-# to provide intuition about the Half-sync/half-async pattern
+# to provide intuition about the Half-sync/half-async pattern.
+# It is not a real runnable code
 if __name__ == '__main__':
     taskQueue = TaskQueue()
     completedTaskQueue = CompletedTaskQueue()

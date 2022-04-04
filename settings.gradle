@@ -3,6 +3,7 @@ include 'design_patterns:half_sync_half_async:half_sync_half_async_java'
 include 'design_patterns:half_sync_half_async:half_sync_half_async_pseudo'
 include 'design_patterns:half_sync_half_async:half_sync_half_async_python'
 include 'design_patterns:join:join_java'
+include 'design_patterns:join:join_pseudo'
 include 'design_patterns:proactor:proactor_java'
 include 'design_patterns:reactor:reactor_java'
 
