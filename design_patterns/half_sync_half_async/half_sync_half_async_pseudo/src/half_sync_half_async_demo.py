@@ -21,7 +21,7 @@ class Thread:
         runnable()
 
 class ThreadPool:
-    workerThreads: []
+    workerThreads = []
 
     def execute(self, task: Task) -> Future:
         thread: Thread = self.workerThreads.pop()
@@ -33,7 +33,7 @@ class ThreadPool:
         return future
 
 class TaskQueue:
-    tasks: []
+    tasks = []
 
     def enqueue(self, task: Task):
         self.tasks.append(task)
@@ -42,7 +42,7 @@ class TaskQueue:
         return self.tasks.pop()
 
 class CompletedTaskQueue:
-    completedTasks: []
+    completedTasks = []
 
     def enqueue(self, task: Task):
         self.completedTasks.append(task)

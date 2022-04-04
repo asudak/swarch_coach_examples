@@ -1,4 +1,4 @@
-package coach.swarch.designpatterns.halfsynchalfasync.simplifiedsdk;
+package coach.swarch.designpatterns.halfsynchalfasync.simplified;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -44,7 +44,7 @@ class AsynchronousService {
     }
 }
 
-public class HalfSyncHalfAsyncSimplifiedSdkDemo {
+public class HalfSyncHalfAsyncSimplifiedDemo {
 
     public static void main(String[] args) throws Exception {
         BlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>();

@@ -1,4 +1,4 @@
-package coach.swarch.designpatterns.proactor.simplifiedsdk;
+package coach.swarch.designpatterns.proactor.simplified;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -127,7 +127,7 @@ class WriteCompletionHandler implements CompletionHandler<Integer, Context> {
 
 }
 
-public class ProactorSimplifiedSdkDemo {
+public class ProactorSimplifiedDemo {
 
     public static void main(String[] args) throws Exception {
         int serverPort = new Random().nextInt(10000, 30000);

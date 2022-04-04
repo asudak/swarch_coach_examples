@@ -1,4 +1,4 @@
-package coach.swarch.designpatterns.reactor.simplifiedsdk;
+package coach.swarch.designpatterns.reactor.simplified;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -164,7 +164,7 @@ class Reactor {
     };
 }
 
-public class ReactorSimplifiedSdkDemo {
+public class ReactorSimplifiedDemo {
 
     public static void main(String[] args) throws Exception {
         int serverPort = new Random().nextInt(10000, 30000);
