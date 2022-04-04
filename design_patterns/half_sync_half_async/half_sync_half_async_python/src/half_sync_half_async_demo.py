@@ -128,7 +128,7 @@ if __name__ == '__main__':
     asynchronous_service.submit(DemoTask())
 
     # There should be no completed tasks at this point, since the only previously
-    # submitted task sleeps for 1000ms
+    # submitted task sleeps for 1s
     completed_task = asynchronous_service.get_completed_task()
     assert completed_task is None
 
