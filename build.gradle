@@ -1,4 +1,4 @@
-group 'coach.swarch.examples'
+group 'app.swarch.examples'
 
 allprojects {
     version '1.0-SNAPSHOT'
