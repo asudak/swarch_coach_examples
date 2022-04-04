@@ -10,7 +10,7 @@ class Task:
         self.result = None
 
     def execute(self):
-        pass
+        return self
 
     def on_complete(self):
         pass
