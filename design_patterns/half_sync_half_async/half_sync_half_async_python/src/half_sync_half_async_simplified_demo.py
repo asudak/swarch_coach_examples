@@ -46,6 +46,7 @@ if __name__ == '__main__':
     class DemoTask(Task):
 
         def execute(self):
+            # simulate synchronous I/O
             time.sleep(1)
             thread = threading.current_thread()
             self.result = "Task %s is executing in thread %s" % (self, thread.name)
