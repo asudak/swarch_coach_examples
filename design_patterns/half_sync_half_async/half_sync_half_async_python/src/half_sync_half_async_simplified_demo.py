@@ -37,8 +37,6 @@ class AsynchronousService:
             return None
 
 
-# This is a Python-based pseudocode written with the intent
-# to provide intuition about the Half-sync/half-async pattern
 if __name__ == '__main__':
     synchronous_service = ThreadPoolExecutor(max_workers=10)
     asynchronous_service = AsynchronousService(synchronous_service)

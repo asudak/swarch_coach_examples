@@ -102,8 +102,6 @@ class AsynchronousService:
         return self.completed_task_queue.dequeue()
 
 
-# This is a Python-based pseudocode written with the intent
-# to provide intuition about the Half-sync/half-async pattern
 if __name__ == '__main__':
     task_queue = TaskQueue()
     completed_task_queue = CompletedTaskQueue()
